@@ -1,5 +1,7 @@
 import React from "react";
 import Country from "./components/Country.jsx";
+import LoadingComponents from "./components/LoadingComponents.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 const App = () => {
   const [countriesData, setCountriesData] = React.useState([]);
@@ -22,26 +24,26 @@ const App = () => {
       });
   }, []);
 
-  if (isLoading) {
-    return <LoadingComponents />;
-  }
   if (error) {
     return <p style={{ color: "red" }}>{error}</p>;
   }
-  if (countriesData.length === 0) {
-    return <p>No countries found</p>;
-  }
+
   return (
-    <div className="px-4 py-8">
-      <div
-        className={
-          "grid sm:grid-cols-2 [@media(min-width:860px)]:grid-cols-3 gap-10 justify-items-center"
-        }
-      >
-        {countriesData.map((countryData, index) => (
-          <Country key={index} countryData={countryData} />
-        ))}
-      </div>
+    <div>
+      <Navbar />
+      {isLoading ? (
+        <LoadingComponents />
+      ) : (
+        <div
+          className={
+            "px-4 py-8 grid sm:grid-cols-2 [@media(min-width:860px)]:grid-cols-3 gap-10 justify-items-center"
+          }
+        >
+          {countriesData.map((countryData, index) => (
+            <Country key={index} countryData={countryData} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
