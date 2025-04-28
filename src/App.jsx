@@ -1,7 +1,8 @@
 import React from "react";
-import Country from "./components/Country.jsx";
+import CountryCard from "./components/CountryCard.jsx";
 import LoadingComponents from "./components/LoadingComponents.jsx";
 import Navbar from "./components/Navbar.jsx";
+import Search from "./components/Search.jsx";
 
 const App = () => {
   const [countriesData, setCountriesData] = React.useState([]);
@@ -31,19 +32,22 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      {isLoading ? (
-        <LoadingComponents />
-      ) : (
-        <div
-          className={
-            "px-4 py-8 grid sm:grid-cols-2 [@media(min-width:860px)]:grid-cols-3 gap-10 justify-items-center"
-          }
-        >
-          {countriesData.map((countryData, index) => (
-            <Country key={index} countryData={countryData} />
-          ))}
-        </div>
-      )}
+      <div className={"max-w-[1100px] w-90% mx-auto px-4"}>
+        <Search />
+        {isLoading ? (
+          <LoadingComponents />
+        ) : (
+          <div
+            className={
+              "px-4 py-8 grid sm:grid-cols-2 [@media(min-width:860px)]:grid-cols-3 gap-8 justify-between"
+            }
+          >
+            {countriesData.map((countryData, index) => (
+              <CountryCard key={index} countryData={countryData} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
