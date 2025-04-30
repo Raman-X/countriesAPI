@@ -13,7 +13,7 @@ const Dropdown = ({ selectedRegion, setSelectedRegion }) => {
   return (
     <>
       <select
-        className="select mx-4 max-w-50"
+        className="select mx-4 max-w-50 cursor-pointer"
         value={selectedRegion}
         onChange={(e) => setSelectedRegion(e.target.value)}
       >

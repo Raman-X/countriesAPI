@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ThemeSwitcher = () => {
   return (
@@ -28,9 +29,15 @@ const ThemeSwitcher = () => {
 };
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <div className="navbar bg-base-100 shadow-sm border-b border-base-200 mb-8 pr-4 gap-5 sticky z-10 ">
+      <div
+        onClick={() => {
+          navigate("/");
+        }}
+        className="navbar bg-base-100 shadow-sm border-b border-base-200 mb-8 pr-4 gap-5 sticky z-10 "
+      >
         <div
           className={
             "flex justify-between w-[1100px] max-w-[100%] mx-auto px-4"
