@@ -1,16 +1,30 @@
 import React from "react";
 
-const Dropdown = () => {
+const Dropdown = ({ selectedRegion, setSelectedRegion }) => {
+  const regions = [
+    "All",
+    "Africa",
+    "Americas",
+    "Asia",
+    "Europe",
+    "Oceania",
+    "Antarctic",
+  ];
   return (
     <>
-      <select defaultValue="Filter by region" className="select mx-4 max-w-50">
-        <option disabled={true}>Filter by region</option>
-        <option>All</option>
-        <option>Africa</option>
-        <option>Asia</option>
-        <option>America</option>
-        <option>Europe</option>
-        <option>Oceania</option>
+      <select
+        className="select mx-4 max-w-50"
+        value={selectedRegion}
+        onChange={(e) => setSelectedRegion(e.target.value)}
+      >
+        <option disabled={true} value={""}>
+          Filter by region
+        </option>
+        {regions.map((region) => (
+          <option key={region} value={region}>
+            {region}
+          </option>
+        ))}
       </select>
     </>
   );

@@ -2,8 +2,8 @@ import React from "react";
 
 const Search = () => {
   return (
-    <div className={"pl-4"}>
-      <label className="input">
+    <>
+      <label className="input ml-4">
         <svg
           className="h-[1em] opacity-50"
           xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +22,7 @@ const Search = () => {
         </svg>
         <input type="search" required placeholder="Search for countries" />
       </label>
-    </div>
+    </>
   );
 };
 
