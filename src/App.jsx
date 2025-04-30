@@ -40,7 +40,27 @@ const App = () => {
   );
 
   if (error) {
-    return <p className={"text-red-500 text-center"}>{error}</p>;
+    return (
+      <div className="flex flex-col items-center justify-center h-[80vh] text-center px-4">
+        <h1 className="text-3xl font-semibold text-red-600 mb-4">
+          Oops! Something went wrong 😕
+        </h1>
+        <p className="text-lg text-gray-700 max-w-md">
+          We couldn’t load the country data right now. The API might be busy or
+          your internet connection had a hiccup.
+        </p>
+        <p className="text-md text-gray-500 mt-2">
+          Please try reloading the page or come back a little later.
+        </p>
+
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
+        >
+          Reload Page
+        </button>
+      </div>
+    );
   }
 
   return (
