@@ -3,6 +3,7 @@ import CountryCard from "./components/CountryCard.jsx";
 import LoadingComponents from "./components/LoadingComponents.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Search from "./components/Search.jsx";
+import Dropdown from "./components/Dropdown.jsx";
 
 const App = () => {
   const [countriesData, setCountriesData] = React.useState([]);
@@ -32,14 +33,18 @@ const App = () => {
   return (
     <div>
       <Navbar />
+
       <div className={"max-w-[1100px] w-90% mx-auto px-4"}>
-        <Search />
+        <div className="flex justify-between flex-wrap gap-5">
+          <Search />
+          <Dropdown />
+        </div>
         {isLoading ? (
           <LoadingComponents />
         ) : (
           <div
             className={
-              "px-4 py-8 grid sm:grid-cols-2 [@media(min-width:860px)]:grid-cols-3 gap-8 justify-between"
+              "px-4 py-8 grid sm:grid-cols-2 [@media(min-width:860px)]:grid-cols-3 gap-24 justify-items-stretch"
             }
           >
             {countriesData.map((countryData, index) => (

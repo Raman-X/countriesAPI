@@ -14,7 +14,7 @@ const LoadingComponents = () => {
   return (
     <div
       className={
-        "grid sm:grid-cols-2 [@media(min-width:860px)]:grid-cols-3 gap-8 justify-items-center"
+        "grid sm:grid-cols-2 [@media(min-width:860px)]:grid-cols-3 gap-8 pl-4"
       }
     >
       {loadingSkeleton()} {loadingSkeleton()} {loadingSkeleton()}
