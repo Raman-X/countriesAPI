@@ -10,18 +10,17 @@ const App = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const [selectedRegion, setSelectedRegion] = React.useState("");
+  const [searchQuery, setSearchQuery] = React.useState("");
 
   React.useEffect(() => {
     setIsLoading(true);
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setCountriesData(data);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
         setError(error.message);
         setIsLoading(false);
       });
@@ -30,20 +29,23 @@ const App = () => {
   if (error) {
     return <p style={{ color: "red" }}>{error}</p>;
   }
+
   const filteredCountries =
     selectedRegion === "" || selectedRegion === "All"
       ? countriesData
-      : countriesData.filter(
-          (countryData, index) => countryData.region === selectedRegion,
-        );
+      : countriesData.filter((country) => country.region === selectedRegion);
+
+  const searchedCountries = filteredCountries.filter((country) =>
+    country.name.common.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
 
   return (
     <div>
       <Navbar />
 
-      <div className={"max-w-[1100px] w-90% mx-auto px-4"}>
+      <div className="max-w-[1100px] w-90% mx-auto px-4">
         <div className="flex justify-between flex-wrap gap-5 mb-2">
-          <Search />
+          <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
           <Dropdown
             selectedRegion={selectedRegion}
             setSelectedRegion={setSelectedRegion}
@@ -52,12 +54,8 @@ const App = () => {
         {isLoading ? (
           <LoadingComponents />
         ) : (
-          <div
-            className={
-              "px-4 py-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-24 justify-items-stretch max-sm:justify-items-start"
-            }
-          >
-            {filteredCountries.map((countryData, index) => (
+          <div className="px-4 py-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-24 justify-items-stretch max-sm:justify-items-start">
+            {searchedCountries.map((countryData, index) => (
               <CountryCard key={index} countryData={countryData} />
             ))}
           </div>
