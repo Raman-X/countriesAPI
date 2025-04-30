@@ -18,11 +18,13 @@ const App = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("https://restcountries.com/v3.1/all")
+    fetch("/countries.json")
       .then((response) => response.json())
       .then((data) => {
-        setCountriesData(data);
-        setIsLoading(false);
+        setTimeout(() => {
+          setCountriesData(data);
+          setIsLoading(false);
+        }, 2500);
       })
       .catch((error) => {
         setError(error.message);
